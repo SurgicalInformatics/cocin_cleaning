@@ -76,6 +76,82 @@ count(oneline, number_symptoms.factor, number_symptoms)
 count(oneline, any_symptoms, number_symptoms.factor)
 
 
+# Any incidence of symptom (index or readmission)
+oneline = oneline %>% 
+  mutate(
+    any_fever = case_when(
+      fever_ceoccur_v2 == 'Yes' | fever == 'Yes' | fever_ceoccur_v3 == 'Yes' | temp_vsorres >= 38 | daily_temp_vsorres >= 38 ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Fever"),
+    any_cough = case_when(
+      cough == 'Yes' | cough_ceoccur_v2 == 'Yes' | coughsput_ceoccur_v2 == 'Yes' | coughhb_ceoccur_v2 == 'Yes' | 
+        cough_ceoccur_v3 == 'Yes' | coughsput_ceoccur_v3 == 'Yes' | coughhb_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Cough"),
+    any_dyspnoe = case_when(
+      dyspnoe == 'Yes' | shortbreath_ceoccur_v2 == 'Yes' | shortbreath_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Dyspnoea"),
+    any_fatigue = case_when(
+      fatigue_ceoccur_v2 == 'Yes' | fatigue_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Fatigue"),
+    any_confusion = case_when(
+      confusion_ceoccur_v2 == 'Yes' | confusion_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Confusion"),
+    any_diarrhoea = case_when(
+      diarrhoea_ceoccur_v2 == 'Yes' | diarrhoea_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Diarrhoea"),
+    any_vomit = case_when(
+      vomit_ceoccur_v2 == 'Yes' | vomit_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Vomiting"),
+    any_myalgia = case_when(
+      myalgia_ceoccur_v2 == 'Yes' | myalgia_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Myalgia"),
+    any_chestpain = case_when(
+      chestpain_ceoccur_v2 == 'Yes' | chestpain_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Chest Pain"),
+    any_headache = case_when(
+      headache_ceoccur_v2 == 'Yes' | headache_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Headache"),
+    any_wheeze = case_when(
+      wheeze_ceoccur_v2 == 'Yes' | wheeze_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Wheezing"),
+    any_abdopain = case_when(
+      abdopain_ceoccur_v2 == 'Yes' | abdopain_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Abdominal Pain"),
+    any_sorethroat = case_when(
+      sorethroat_ceoccur_v2 == 'Yes' | sorethroat_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Sore Throat"),
+    any_jointpain = case_when(
+      jointpain_ceoccur_v2 == 'Yes' | jointpain_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Joint Pain"),
+    any_runnynose = case_when(
+      runnynose_ceoccur_v2 == 'Yes' | runnynose_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Runny Nose"),
+    any_skinulcers = case_when(
+      skinulcers_ceoccur_v2 == 'Yes' | skinulcers_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Skin Ulcers"),
+    any_seizures = case_when(
+      seizures_cecoccur_v2 == 'Yes' | seizures_cecoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Seizures"),
+    any_skinrash = case_when(
+      rash_ceoccur_v2 == 'Yes' | rash_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Skin Rash"),
+    any_lowerchest = case_when(
+      lowerchest_ceoccur_v2 == 'Yes' | lowerchest_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Lower Chest Indrawing"),
+    any_bleed = case_when(
+      bleed_ceoccur_v2 == 'Yes' | bleed_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Bleeding"),
+    any_lymp = case_when(
+      lymp_ceoccur_v2 == 'Yes' | lymp_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Lymphadenopathy"),
+    any_earpain = case_when(
+      earpain_ceoccur_v2 == 'Yes' | earpain_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Ear Pain"),
+    any_conjunct = case_when(
+      conjunct_ceoccur_v2 == 'Yes' | conjunct_ceoccur_v3 == 'Yes' ~ 'Yes',
+      TRUE ~ "No") %>% ff_label("Conjunctivitis")
+  )
+
+
 # labelling ----
 oneline = oneline %>% 
   mutate(
