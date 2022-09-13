@@ -3,7 +3,7 @@
 
 library(tidyverse)
 library(finalfit)
-source("functions.R")
+source("https://raw.githubusercontent.com/SurgicalInformatics/cocin_cleaning/main/functions.R")
 datadir = "/home/common/covid/cleaned/full/"
 timestamp = "2022-05-06_1157"
 
