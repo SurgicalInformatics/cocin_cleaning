@@ -80,7 +80,7 @@ count(oneline, any_symptoms, number_symptoms.factor)
 oneline = oneline %>% 
   mutate(
     any_fever = case_when(
-      fever_ceoccur_v2 == 'Yes' | fever == 'Yes' | fever_ceoccur_v3 == 'Yes' | temp_vsorres >= 38 | daily_temp_vsorres >= 38 ~ 'Yes',
+      fever_ceoccur_v2 == 'Yes' | fever == 'Yes' | fever_ceoccur_v3 == 'Yes' | temp_vsorres >= 38 | daily_temp_vsorres.day1 >= 38 ~ 'Yes',
       TRUE ~ "No") %>% ff_label("Fever"),
     any_cough = case_when(
       cough == 'Yes' | cough_ceoccur_v2 == 'Yes' | coughsput_ceoccur_v2 == 'Yes' | coughhb_ceoccur_v2 == 'Yes' | 
