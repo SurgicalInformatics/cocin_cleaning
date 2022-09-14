@@ -37,13 +37,6 @@ ccp_treatment_vars = ccp_data %>%
       factor(levels = c("Yes")) %>% 
       ff_label("Corticosteroids")),
     
-    any_tocilizumab = as.factor(case_when(
-      il6_cmtrt == "Tocilizumab" ~ "Yes",
-      TRUE ~ NA_character_
-    ) %>% 
-      factor(levels = c("Yes")) %>% 
-      ff_label("Tocilizumab")),
-    
     any_steroid = as.factor(case_when(
       any_dexa == "Yes" | any_cortico == "Yes" ~ "Yes",
       TRUE ~ NA_character_
@@ -51,14 +44,13 @@ ccp_treatment_vars = ccp_data %>%
       factor(levels = c("Yes")) %>% 
       ff_label("Steroids")) 
   ) %>% 
-  select(subjid, any_dexa, any_cortico, any_tocilizumab, any_steroid) %>% 
-  filter(any_dexa == "Yes" | any_cortico == "Yes" | any_tocilizumab == "Yes" | any_steroid == "Yes")
+  select(subjid, any_dexa, any_cortico, any_steroid) %>% 
+  filter(any_dexa == "Yes" | any_cortico == "Yes" | any_steroid == "Yes")
 
 # Join back to oneline
 oneline = oneline %>% 
   left_join(ccp_treatment_vars, by="subjid") %>% 
   mutate(any_dexa = fct_explicit_na(any_dexa, "No") %>% fct_relevel("No"),
          any_cortico = fct_explicit_na(any_cortico, "No") %>% fct_relevel("No"),
-         any_tocilizumab = fct_explicit_na(any_tocilizumab, "No") %>% fct_relevel("No"),
          any_steroid = fct_explicit_na(any_steroid, "No") %>% fct_relevel("No")
   )
